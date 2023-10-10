@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ComposeLesson2</string>
+    <string name="select_available_action">Select an available action</string>
+    <string name="all_employees">All employees of the Company</string>
+    <string name="practical_task">The practical task</string>
+    <string name="add_company_employee">Add a company employee</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

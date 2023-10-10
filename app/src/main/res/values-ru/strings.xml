@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ComposeLesson2</string>
+    <string name="select_available_action">Выберите доступное действие</string>
+    <string name="all_employees">Все сотрудники компании</string>
+    <string name="practical_task">Практическое задание</string>
+    <string name="add_company_employee">Добавить сотрудника компании</string>
+</resources>
