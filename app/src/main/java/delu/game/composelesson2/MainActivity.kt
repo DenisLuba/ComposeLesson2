@@ -37,117 +37,48 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import delu.game.composelesson2.screens.LayoutAddEmployee
+import delu.game.composelesson2.screens.LayoutStart
 import delu.game.composelesson2.ui.theme.ComposeLesson2Theme
 import delu.game.composelesson2.ui.theme.DefaultBackground
 import java.time.format.TextStyle
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        const val LAYOUT_START = "LAYOUT_START"
+        const val LAYOUT_EMPLOYEES = "LAYOUT_EMPLOYEES"
+        const val LAYOUT_ADD_EMPLOYEE = "LAYOUT_ADD_EMPLOYEE"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            StartPage()
+            val navController = rememberNavController()
+            ComposeLesson2Theme {
+                NavHost(
+                    navController = navController,
+                    startDestination = LAYOUT_START
+                ) {
+                    composable(LAYOUT_START) {
+                        LayoutStart (
+                            { navController.navigate(LAYOUT_EMPLOYEES) },
+                            { navController.navigate(LAYOUT_ADD_EMPLOYEE) }
+                        )
+                    }
+                    composable(LAYOUT_EMPLOYEES) {
+
+                    }
+                    composable(LAYOUT_ADD_EMPLOYEE) {
+
+                    }
+                }
+            }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun StartPage() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        Title()
-        StartButtons()
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Title() {
-    Text(
-        modifier = Modifier
-            .background(DefaultBackground)
-            .height(68.dp)
-            .wrapContentHeight()
-            .padding(start = 8.dp)
-            .fillMaxWidth(),
-        text = stringResource(id = R.string.practical_task),
-        textAlign = TextAlign.Start,
-        color = Color.Black,
-        fontSize = 24.sp,
-        fontWeight = Bold,
-        fontFamily = FontFamily.SansSerif
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun StartButtons() {
-    Column(
-        modifier = Modifier
-            .wrapContentHeight()
-            .wrapContentWidth()
-            .fillMaxSize()
-            .wrapContentWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-
-        Text(
-            modifier = Modifier
-                .height(dimensionResource(R.dimen.start_layout_button_height))
-                .width(dimensionResource(R.dimen.start_layout_button_width))
-                .wrapContentHeight(),
-            textAlign = TextAlign.Center,
-            text = stringResource(R.string.select_available_action),
-            fontSize = 20.sp,
-            fontFamily = FontFamily.SansSerif
-        )
-
-        Button(
-            modifier = Modifier
-                .height(dimensionResource(R.dimen.start_layout_button_height))
-                .width(dimensionResource(R.dimen.start_layout_button_width)),
-            onClick = { getAllEmployees() },
-            colors = ButtonDefaults.buttonColors(containerColor = DefaultBackground),
-            shape = MaterialTheme.shapes.medium
-        ) {
-            Text(
-                text = stringResource(id = R.string.all_employees),
-                fontFamily = FontFamily.SansSerif,
-                fontSize = 16.sp,
-                fontWeight = Bold,
-                color = Color.Black
-            )
-        }
-
-        Spacer(modifier = Modifier.height(4.dp))
-
-        Button(
-            modifier = Modifier
-                .height(dimensionResource(R.dimen.start_layout_button_height))
-                .width(dimensionResource(R.dimen.start_layout_button_width)),
-            onClick = { addEmployee() },
-            colors = ButtonDefaults.buttonColors(containerColor = DefaultBackground),
-            shape = MaterialTheme.shapes.medium
-        ) {
-            Text(
-                text = stringResource(id = R.string.add_company_employee),
-                fontFamily = FontFamily.SansSerif,
-                fontSize = 16.sp,
-                fontWeight = Bold,
-                color = Color.Black
-            )
-        }
-    }
-}
-
-private fun getAllEmployees()  {
-
-}
-
-private fun addEmployee() {
-
-}
